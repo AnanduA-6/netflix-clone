@@ -1,7 +1,7 @@
 const express=require("express")
 require("dotenv").config();
 const cors=require('cors')
-require("./db_config/dbconnection")
+require("./Server/db_config/dbconnection")
 const app=express();
 const PORT=process.env.PORT||4040
 const signupRoute=require("./Server/routes/newUser")
