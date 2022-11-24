@@ -10,7 +10,7 @@ export const tvGenres="https://api.themoviedb.org/3/genre/tv/list?api_key=d6d47f
 export const tvOnly="https://api.themoviedb.org/3/discover/tv?api_key=d6d47f39c9fd13524ea9023dc82cd9c7&language=en-US&sort_by=popularity.desc&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0"
 export const searchUrl="https://api.themoviedb.org/3/search/multi?api_key=d6d47f39c9fd13524ea9023dc82cd9c7&language=en-US&include_adult=false"
 export const list="http://localhost:4040/api/list"
-
+export const serverUrl="https://netflixxcloneserver.herokuapp.com"
 export const genre={
       28: "Action",
     12: "Adventure",

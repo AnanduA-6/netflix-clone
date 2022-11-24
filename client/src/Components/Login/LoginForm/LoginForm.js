@@ -2,6 +2,7 @@ import React,{useContext,useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {ValueContext} from '../../../contexts/ValuesContext'
 import { ThreeDots } from 'react-loading-icons'
+import { serverUrl} from '../../Assets/Assets'
 import axios from 'axios'
 import './LoginForm.css'
 function LoginForm() {
@@ -14,7 +15,7 @@ const navigate=useNavigate()
 function loginClick(){
   setLoading(true)
     axios.post(
-      "http://localhost:4040/api/auth",
+      `${serverUrl}/api/auth`,
       {
         username: attemptingUser,
       },

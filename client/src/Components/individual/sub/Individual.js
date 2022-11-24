@@ -4,6 +4,7 @@ import { ValueContext } from '../../../contexts/ValuesContext'
 import HomeHeader from '../../Home/HomeHeader/HomeHeader'
 import './individual.css'
 import axios from 'axios'
+import {serverUrl} from '../../Assets/Assets'
 
 
 function Individual(props) {
@@ -26,7 +27,7 @@ function handleAdd(data){
         media=data.id+'1'
     }
     axios.post(
-        "http://localhost:4040/api/list",
+        `${serverUrl}/api/list`,
         {
           username:userName,
           mediaid:media
@@ -54,7 +55,7 @@ function handleDelete(data){
         media=data.id+'1'
     }
     axios.post(
-        "http://localhost:4040/api/deletelist",
+        `${serverUrl}/api/deletelist`,
         {
           username:userName,
           mediaid:media
@@ -92,7 +93,7 @@ useEffect(()=>{
             media=individual.id+'1'
         }
         axios.post(
-            "http://localhost:4040/api/getlist",
+            `${serverUrl}/api/getlist`,
             {
               username:userName,
     

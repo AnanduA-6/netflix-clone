@@ -4,6 +4,7 @@ import './SubForm.css'
 import { ThreeDots } from 'react-loading-icons'
 import axios from 'axios'
 import {ValueContext} from '../../../contexts/ValuesContext'
+import {serverUrl} from '../../Assets/Assets'
 function SubForm() {
   const navigate=useNavigate()
   const [password,setPassword]=useState('')
@@ -13,7 +14,7 @@ function SubForm() {
   function passwordCheck(){
     setLoading(true)
       axios.post(
-        "http://localhost:4040/api/authsub",
+        `${serverUrl}/api/authsub`,
         {
           username:userName,
           password:password

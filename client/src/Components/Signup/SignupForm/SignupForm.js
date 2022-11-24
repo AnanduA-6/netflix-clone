@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { ThreeDots } from 'react-loading-icons'
 import './SignupForm.css'
 import axios from 'axios'
+import {serverUrl} from '../../Assets/Assets'
 function SignupForm() {
 const [fname,setFname]=useState('')
 const [lname,setLname]=useState('')
@@ -15,7 +16,7 @@ function signUp(){
   setError('')
   setSuccess(false)
     axios.post(
-      "http://localhost:4040/api/signup",
+      `${serverUrl}/api/signup`,
       {
         fname:fname,
         lname:lname,

@@ -2,6 +2,7 @@ import React,{useContext,useEffect, useState} from 'react'
 import {ValueContext} from '../../contexts/ValuesContext'
 import axios from 'axios'
 import {Navigate} from 'react-router-dom'
+import {serverUrl} from '../Assets/Assets'
 import HomeHeader from '../Home/HomeHeader/HomeHeader'
 import Card from '../Home/MovieScrolls/Card'
 import './AddList.css'
@@ -12,6 +13,7 @@ const [favList,setFavList]=useState(null)
 const [value,setValue]=useState([])
 const [state,setState]=useState(false)
 const [loading,setLoading]=useState(false)
+const [emptyList,setEmptyList]=useState(false)
 
 if(!isAuthenticated){
     return <Navigate to='/login'/>
@@ -25,7 +27,7 @@ function handleDelete(data){
         media=data.id+'1'
     }
     axios.post(
-        "http://localhost:4040/api/deletelist",
+        `${serverUrl}/api/deletelist`,
         {
           username:userName,
           mediaid:media
@@ -45,11 +47,16 @@ function handleDelete(data){
 
 useEffect(()=>{
     setLoading(true)
-    axios.post('http://localhost:4040/api/getlist',{
+    axios.post(`${serverUrl}/api/getlist`,{
         username:userName
     }).then(function(response){
-        setFavList(response.data.list)
-        setLoading(false)
+        
+        if(!response.data||response.data.list.length===0){
+            setEmptyList(true)
+            setLoading(false)
+        }else{
+            setFavList(response.data.list)
+        }
     }).catch(function(error){
         console.log(error);
     })
@@ -57,7 +64,6 @@ useEffect(()=>{
 },[state])
 
 useEffect(()=>{
-    setLoading(true)
     if(favList){
       favList.map(async(element,index)=>{
         let lastDigStr= String(element).slice(-1)
@@ -82,17 +88,18 @@ useEffect(()=>{
 },[favList])
 
 
+
     return (
         <div>
            <HomeHeader navBtnActive={props.navBtnActive}></HomeHeader>
-           {loading?<h1>Loading....</h1>:
+           {loading?<h1 style={{marginTop:'10rem'}}>Loading....</h1>:
            <div className='commonDisplay commonDisplayAddList'>
            {value.map((element,index)=>{
                return <Card handleDelete={handleDelete} AddList={true} element={element} classname={'moviesOnly'} key={index}></Card>
            })}
           </div>          
            }
-          {value.length==0&&!loading?<h2 className='emptyList'>Your list is empty</h2>:''}
+          {emptyList&&!loading?<h2 className='emptyList'>Your list is empty</h2>:''}
 
         </div>
       )
